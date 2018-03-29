@@ -48,7 +48,9 @@ public class ledger {
             FileReader fileReader = new FileReader(fileName);
             Scanner fileScanner = new Scanner(fileReader);
             while (fileScanner.hasNext()) {
-              l.validateAndAddTransaction(fileScanner.nextLine());
+              String t = fileScanner.nextLine();
+              String sig = fileScanner.nextLine();
+              l.validateAndAddTransaction(t, sig);
             }
           } catch (FileNotFoundException e) {
             System.err.println("Error: file " + fileName + " cannot be opened for reading");
@@ -59,7 +61,8 @@ public class ledger {
         case "transaction":
           System.out.print("Enter Transaction: ");
           String t = sc.nextLine();
-          l.validateAndAddTransaction(t);
+          String sig = sc.nextLine();
+          l.validateAndAddTransaction(t, sig);
           break;
 
         case "p":
@@ -160,7 +163,7 @@ public class ledger {
     }
   }
 
-  private void validateAndAddTransaction(String inputTxn) {
+  private void validateAndAddTransaction(String inputTxn, String inputSignature) {
     inputTxn = inputTxn.replaceAll(" ", "").replaceAll(";", "; ").replaceAll(",", ", ");
     int indexofFirstSemiColon = inputTxn.indexOf("; ");
     String inputTxnID = inputTxn.substring(0, indexofFirstSemiColon);
