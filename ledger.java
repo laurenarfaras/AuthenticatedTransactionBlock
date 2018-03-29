@@ -34,6 +34,9 @@ public class ledger {
         System.out.println("[I]nteractive");
         System.out.println("[V]erbose");
         System.out.println("[B]alance");
+        System.out.println("[O]utput transaction block");
+        System.out.println("[C]heck transaction signature");
+        System.out.println("[R]ead key file");
         System.out.println("[E]xit");
         System.out.print("Select a command: ");
       }
@@ -47,11 +50,16 @@ public class ledger {
           try {
             FileReader fileReader = new FileReader(fileName);
             Scanner fileScanner = new Scanner(fileReader);
-            while (fileScanner.hasNext()) {
-              String t = fileScanner.nextLine();
-              String sig = fileScanner.nextLine();
-              l.validateAndAddTransaction(t, sig);
+            try {
+              while (fileScanner.hasNext()) {
+                String t = fileScanner.nextLine();
+                String sig = fileScanner.nextLine();
+                l.validateAndAddTransaction(t, sig);
+              }
+            } catch (Exception e) {
+              System.err.println("Error: " + e);
             }
+
           } catch (FileNotFoundException e) {
             System.err.println("Error: file " + fileName + " cannot be opened for reading");
           }
@@ -130,6 +138,21 @@ public class ledger {
           } else {
             System.out.println(user + " does not exist on this ledger");
           }
+          break;
+
+        case "o":
+        case "output transaction block":
+          System.out.println("outputting transaction block...");
+          break;
+
+        case "c":
+        case "check transaction signature":
+          System.out.println("checking transaction signature...");
+          break;
+
+        case "r":
+        case "read key file":
+          System.out.println("reading key file...");
           break;
 
         case "e":
