@@ -11,7 +11,7 @@ import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 import java.util.Scanner;
 
-public class ledger {
+public class txtblk {
 
   private HashMap<String, Long> userToBalanceMap = new HashMap<>();
   private LinkedHashMap<String, Transaction> txnChain = new LinkedHashMap<>();
@@ -21,7 +21,7 @@ public class ledger {
   private static boolean isVerbose = false;
 
   public static void main(String[] args) {
-    ledger l = new ledger();
+    txtblk tb = new txtblk();
     Scanner sc = new Scanner(System.in);
     while (!isExit) {
       if (isInteractive) {
@@ -54,7 +54,7 @@ public class ledger {
               while (fileScanner.hasNext()) {
                 String t = fileScanner.nextLine();
                 String sig = fileScanner.nextLine();
-                l.validateAndAddTransaction(t, sig);
+                tb.validateAndAddTransaction(t, sig);
               }
             } catch (Exception e) {
               System.err.println("Error: " + e);
@@ -70,12 +70,12 @@ public class ledger {
           System.out.print("Enter Transaction: ");
           String t = sc.nextLine();
           String sig = sc.nextLine();
-          l.validateAndAddTransaction(t, sig);
+          tb.validateAndAddTransaction(t, sig);
           break;
 
         case "p":
         case "print":
-          l.printLedger();
+          tb.printLedger();
           break;
 
         case "h":
@@ -106,7 +106,7 @@ public class ledger {
           String outputFileName = sc.nextLine();
           try {
             FileWriter fw = new FileWriter(new File(outputFileName));
-            l.dumpLedger(fw);
+            tb.dumpLedger(fw);
             fw.close();
           } catch (IOException e) {
             System.err.println("Error: file " + outputFileName + " cannot be opened for writing");
@@ -116,7 +116,7 @@ public class ledger {
 
         case "w":
         case "wipe":
-          l = new ledger();
+          tb = new txtblk();
           break;
 
         case "i":
@@ -133,8 +133,8 @@ public class ledger {
         case "balance":
           System.out.print("Enter User: ");
           String user = sc.nextLine();
-          if (l.userToBalanceMap.containsKey(user)) {
-            System.out.println(user + " has " + l.userToBalanceMap.get(user));
+          if (tb.userToBalanceMap.containsKey(user)) {
+            System.out.println(user + " has " + tb.userToBalanceMap.get(user));
           } else {
             System.out.println(user + " does not exist on this ledger");
           }

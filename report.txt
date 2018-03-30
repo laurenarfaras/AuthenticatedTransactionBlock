@@ -1,0 +1,11 @@
+How I approached the problem:
+- I familiarized myself with the code. Then I created public keys and verified them in the
+  terminal. After I saw how the problem was solved in the terminal, I recreated the solution in
+  my code.
+How I solved any challenges:
+- Challenges I faced were limited resources for solving this problem using Java. I used the internet
+  to help me face this challenge.
+What I did to test the program:
+- I created public keys and tested them with the signatures I created using the program.
+What I learned from the assignment:
+- How public keys can be used to verify the signature on a transaction.
